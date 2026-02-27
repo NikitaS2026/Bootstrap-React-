@@ -1,74 +1,45 @@
-# React + TypeScript + Vite
+Теория:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+    <Container>: Обертка.
 
-Currently, two official plugins are available:
+        fluid: растягивается на 100% ширины экрана.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+        без fluid: имеет фиксированную ширину по центру (с отступами по бокам).
 
-## React Compiler
+    <Row>: Строка. Внутри неё живут колонки.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+    <Col>: Колонка.
 
-## Expanding the ESLint configuration
+        Всего в строке 12 виртуальных колонок.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+        Ты говоришь колонке, сколько места занимать. xs={12} (весь ряд), md={6} (половина), lg={3} (четверть).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Твой инструмент — брейкпоинты (Breakpoints):
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+    xs (extra small) — телефоны (<576px)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+    md (medium) — планшеты/ноуты (≥768px)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    xxl (extra extra large) — большие мониторы (≥1400px)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Если ты пишешь <Col xs={12} md={6}>, это читается так: "На мобиле займи всё место, а начиная с планшета и шире — занимай только половину". 
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# Bootstrap-React-
+fluid — это "На весь экран". Всегда.
+
+Представь себе ведро с водой.
+
+    Обычный <Container> — это КИРПИЧ в ведре.
+
+        Ты кидаешь его, он падает на дно.
+
+        Слева и справа от кирпича есть пустое место (вода).
+
+        На мониторе это выглядит так: контент по центру, а по бокам белые (или какие там у тебя) полосы.
+
+    <Container fluid> — это ВОДА в ведре.
+
+        Она растекается от стенки до стенки.
+
+        Нет никаких пустых полос по бокам.
+
+        Если ты растянешь экран (ведро станет шире) — вода (контент) тоже растянется.
